@@ -3,18 +3,30 @@
 /* ---------- Root Colors ---------- */
 
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
+  --background: #FAFBFC;
+  --foreground: #0F172A;
 
   --primary: #1E3A8A;
-  --secondary: #f8fafc;
+  --secondary: #F8FAFC;
 
-  --muted: #6b7280;
-
-  --border: #e5e7eb;
+  --muted: #64748B;
+  --border: #E2E8F0;
 }
 
-/* ---------- Theme ---------- */
+/* ---------- Dark Theme ---------- */
+
+.dark {
+  --background: #020617;
+  --foreground: #F8FAFC;
+
+  --primary: #3B82F6;
+  --secondary: #0F172A;
+
+  --muted: #94A3B8;
+  --border: #334155;
+}
+
+/* ---------- Tailwind Theme ---------- */
 
 @theme inline {
   --color-background: var(--background);
@@ -22,7 +34,6 @@
 
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-
   --color-border: var(--border);
 
   --font-sans: var(--font-inter);
@@ -30,63 +41,23 @@
 
 /* ---------- Global ---------- */
 
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:var(--background);
-  color:var(--foreground);
-}
-
-/* ---------- Selection ---------- */
-
-::selection{
-  background:#2563eb;
-  color:white;
-}
-
-/* ---------- Images ---------- */
-
-img{
-  user-select:none;
-}
-
-/* ---------- Buttons ---------- */
-
-button{
-  cursor:pointer;
-}
-
-/* ---------- Links ---------- */
-
-a{
-  transition:all .25s ease;
-}
-
-/* ---------- Sections ---------- */
-
-section{
-  scroll-margin-top:90px;
-}
-/* ---------- Smooth Scrolling ---------- */
-
 html {
   scroll-behavior: smooth;
 }
 
-/* ---------- Professional Selection ---------- */
-
-::selection {
-  background: #1E3A8A;
-  color: white;
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color .3s ease,
+    color .3s ease;
 }
 
-/* ---------- Better Body ---------- */
+/* ---------- Selection ---------- */
 
-body {
-  background: #FAFBFC;
-  color: #0F172A;
+::selection {
+  background: var(--primary);
+  color: white;
 }
 
 /* ---------- Images ---------- */
@@ -102,23 +73,26 @@ button {
   cursor: pointer;
 }
 
-/* ---------- Better Sections ---------- */
+/* ---------- Links ---------- */
+
+a {
+  transition:
+    color .25s ease,
+    background-color .25s ease;
+}
+
+/* ---------- Sections ---------- */
 
 section {
   scroll-margin-top: 90px;
 }
 
-/* ---------- Nice Transition ---------- */
+/* ---------- Global Animation ---------- */
 
 * {
   transition:
     background-color .25s ease,
     color .25s ease,
     border-color .25s ease,
-    transform .25s ease,
     box-shadow .25s ease;
-}
-
-html {
-  scroll-behavior: smooth;
 }

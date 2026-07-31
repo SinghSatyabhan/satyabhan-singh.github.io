@@ -1,63 +1,101 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-
-const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Timeline", href: "#timeline" },
-  { name: "Research", href: "#research" },
-  { name: "Projects", href: "#projects" },
-  { name: "Publications", href: "#publications" },
-  { name: "Contact", href: "#contact" },
-];
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import Container from "./ui/Container";
+import { navigation } from "../data/navigation";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
 
-    return () => window.removeEventListener("scroll", onScroll);
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "auto";
+  }, [mobileOpen]);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-xl shadow-lg"
+          ? "border-b border-slate-200/70 bg-white/85 backdrop-blur-xl shadow-sm"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-5">
+      <Container>
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="#home"
+            className="text-2xl font-bold tracking-tight text-[#1F3A6E]"
+          >
+            Satyabhan Singh
+          </Link>
 
-        <Link
-          href="#home"
-          className="text-2xl font-bold text-[#1F3A6E]"
-        >
-          Satyabhan Singh
-        </Link>
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-8 lg:flex">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="relative font-medium text-slate-700 transition-colors duration-200 hover:text-[#1F3A6E]"
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
 
-        <nav className="hidden lg:flex gap-8">
+          {/* Mobile Button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="rounded-lg p-2 text-slate-700 transition hover:bg-slate-100 lg:hidden"
+            aria-label="Toggle navigation"
+          >
+            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </Container>
 
-          {navItems.map((item) => (
-
-            <a
-              key={item.name}
-              href={item.href}
-              className="font-medium text-slate-700 transition hover:text-[#1F3A6E]"
-            >
-              {item.name}
-            </a>
-
-          ))}
-
-        </nav>
-
-      </div>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -25 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -25 }}
+            transition={{ duration: 0.25 }}
+            className="border-t border-slate-200 bg-white lg:hidden"
+          >
+            <Container className="py-6">
+              <nav className="flex flex-col gap-5">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded-lg px-3 py-2 text-lg font-medium text-slate-700 transition hover:bg-[#EAF2FF] hover:text-[#1F3A6E]"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </nav>
+            </Container>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
