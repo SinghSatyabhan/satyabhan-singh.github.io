@@ -7,7 +7,7 @@ export default function Projects() {
   return (
     <section 
       id="projects" 
-      className="scroll-mt-28 py-24 bg-[#F8FAFC]"
+      className="scroll-mt-28 py-24 bg-white"
     >
 
       <Container>
