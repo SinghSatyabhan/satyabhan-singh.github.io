@@ -14,14 +14,8 @@ export const profile = {
   location: "Mumbai, India",
 
   bio: `
-I am a PhD researcher at IIT Bombay working in computational chemistry,
-homogeneous catalysis, and machine learning–guided catalyst design for
-sustainable ammonia synthesis.
-
-My research integrates density functional theory (DFT), data-driven
-approaches, and Bayesian Optimization to accelerate catalyst discovery
-for nitrogen reduction.
-`,
+I am a PhD researcher at IIT Bombay working in computational chemistry, homogeneous catalysis, and machine learning–guided catalyst design for sustainable ammonia synthesis.
+My research integrates density functional theory (DFT), data-driven approaches, and Bayesian Optimization to accelerate catalyst discovery for nitrogen reduction.`,
 
   interests: [
     "Computational Chemistry",
