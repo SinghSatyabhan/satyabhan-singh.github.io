@@ -30,7 +30,7 @@ export default function Hero() {
               {hero.institute}
             </p>
 
-            <h1 className="mt-6 text-5xl font-extrabold leading-tight text-[#0F172A] md:text-7xl">
+            <h1 className="mt-6 text-4xl font-extrabold leading-tight text-[#0F172A] md:text-7xl">
               {hero.name}
             </h1>
 
